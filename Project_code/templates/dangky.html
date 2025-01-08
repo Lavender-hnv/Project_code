@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<section class="hero">
+  <h1>Đăng Ký Thực Hành Thiền Thở</h1>
+  <p>Tham gia ngay để nhận hướng dẫn thiền thở giúp giảm áp lực học tập.</p>
+</section>
+<section class="content">
+  <h2>Form Đăng Ký</h2>
+  <form action="{% url 'register' %}" method="post" class="registration-form">
+    {% csrf_token %}
+    <label for="email">Email:</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      required
+      value="{%if email%} {{email}} {%endif%}"
+    />
+
+    <label for="password">Mật Khẩu:</label>
+    <input type="password" id="password" name="password" required />
+
+    <label for="confirm_password">Nhập lại mật khẩu:</label>
+    <input
+      type="password"
+      id="confirm_password"
+      name="confirm_password"
+      required
+    />
+    {% if error %}
+    <i style="color: red" class="error">{{ error }}</i>
+    {% endif %} {% comment %} {% if error: %}
+    <i style="color: red">Mật khẩu nhập lại không khớp!</i>
+    {% endif %} {% endcomment %}
+
+    <button type="submit" class="submit-button">Đăng ký ngay</button>
+  </form>
+</section>
+{% endblock content %}
